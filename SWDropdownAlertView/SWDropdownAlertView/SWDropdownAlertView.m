@@ -17,8 +17,8 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView *iconImageView;
 @property (weak, nonatomic) IBOutlet UILabel *messageLabel;
-//@property (assign, nonatomic) CGFloat duration;
 @property (assign, nonatomic) SWDropdownAlertViewType alertViewType;
+@property (strong, nonatomic) UIView *maskView;
 
 @end
 
@@ -39,9 +39,9 @@ static NSString *kSWDropdownAlertViewBackgroundColor = @"background";
 - (void)alertViewWithMessage:(NSString*)message withType:(SWDropdownAlertViewType)type{
     _settings = @[@{kSWDropdownAlertViewIconImage : @"IconSuccess",
                     kSWDropdownAlertViewBackgroundColor : @"#17a05e"},
-                  @{kSWDropdownAlertViewIconImage : @"IconInfo",
-                    kSWDropdownAlertViewBackgroundColor : @"#ff6d00"},
                   @{kSWDropdownAlertViewIconImage : @"IconWarning",
+                    kSWDropdownAlertViewBackgroundColor : @"#ff6d00"},
+                  @{kSWDropdownAlertViewIconImage : @"IconError",
                     kSWDropdownAlertViewBackgroundColor : @"#ff3d00"},
                 ];
     self.alertViewType = type;
@@ -84,14 +84,27 @@ static NSString *kSWDropdownAlertViewBackgroundColor = @"background";
     frame.origin.y -= frame.size.height;
     self.frame = frame;
     
-    [[[UIApplication sharedApplication] keyWindow] addSubview:self];
+    UIWindow *keyWindow = [[UIApplication sharedApplication] keyWindow];
+    
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(maskViewDidClicked:)];
+    
+    _maskView = [[UIView alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    _maskView.alpha = 0;
+    _maskView.backgroundColor = [UIColor blackColor];
+    [_maskView addGestureRecognizer:tapGestureRecognizer];
+    
+    [keyWindow addSubview:_maskView];
+    [keyWindow addSubview:self];
 //    if (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_7_1) {
 //        UIVisualEffect *visualEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
 //        UIVisualEffectView *blurView = [[UIVisualEffectView alloc] initWithEffect:visualEffect];
 //        blurView.frame = self.bounds;
 //        [self insertSubview:blurView atIndex:0];
 //    }
-    UIWindow *keyWindow = [[UIApplication sharedApplication] keyWindow];
+    [UIView animateWithDuration:0.25 animations:^{
+        _maskView.alpha = 0.5;
+    }];
+    
     _animator = [[UIDynamicAnimator alloc] initWithReferenceView: keyWindow];
     [keyWindow setWindowLevel:UIWindowLevelStatusBar + 1];
 
@@ -130,6 +143,12 @@ static NSString *kSWDropdownAlertViewBackgroundColor = @"background";
     gravity.gravityDirection = CGVectorMake(0, -1.5);
     [_animator addBehavior:gravity];
     
+    [UIView animateWithDuration:0.25 animations:^{
+        _maskView.alpha = 0;
+    } completion:^(BOOL finishied){
+        [_maskView removeFromSuperview];
+    }];
+    
     __weak SWDropdownAlertView *weakSelf = self;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.25 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
         [_animator removeAllBehaviors];
@@ -153,5 +172,8 @@ static NSString *kSWDropdownAlertViewBackgroundColor = @"background";
     });
 }
 
+- (void)maskViewDidClicked:(UITapGestureRecognizer*)tapGesture{
+    [self dismiss];
+}
 
 @end

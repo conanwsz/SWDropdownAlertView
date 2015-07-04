@@ -9,7 +9,7 @@ Pod::Spec.new do |s|
 
                    DESC
 
-  s.homepage     = "http://EXAMPLE/SWDropdownAlertView"
+  s.homepage     = "https://github.com/conanwsz/SWDropdownAlertView"
   s.license      = "MIT"
 
   s.author       = { "conanwsz" => "conanwsz@gmail.com" }

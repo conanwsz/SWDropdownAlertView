@@ -33,7 +33,10 @@
 
 - (IBAction)showWarning:(id)sender{
     SWDropdownAlertView *alertView = [SWDropdownAlertView alertViewWithMessage:@"这是警告" withType:SWDropdownAlertViewTypeWarning];
-    [alertView show];
+    [alertView showWithCompletion:^(SWDropdownAlertViewType type){
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"这是警告" message:@"在SWDropdownAlertView跳出后执行" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+        [alertView show];
+    }];
 }
 
 - (IBAction)showError:(id)sender{

@@ -17,6 +17,15 @@ typedef NS_ENUM(NSUInteger, SWDropdownAlertViewType) {
 typedef void (^SWDropdownAlertViewCompletion)(SWDropdownAlertViewType type);
 
 @interface SWDropdownAlertView : UIView
+
+/**
+ *  建立一个Dropdown alert view
+ *
+ *  @param message alert的具体内容
+ *  @param type    alert的类型。类型有三种，“完成”，“警告”，“错误”。
+ *
+ *  @return SWDropdownAlertView
+ */
 + (SWDropdownAlertView*)alertViewWithMessage:(NSString*)message withType:(SWDropdownAlertViewType)type;
 
 

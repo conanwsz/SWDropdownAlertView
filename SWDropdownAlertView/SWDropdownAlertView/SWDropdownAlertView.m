@@ -9,6 +9,11 @@
 
 #import "UIColor+HexColor.h"
 #import "SWDropdownAlertView.h"
+typedef NS_ENUM(NSUInteger, SWDropdownAlertViewAnimationDirection) {
+    SWDropdownAlertViewAnimationDirectionDrop = 0,
+    SWDropdownAlertViewAnimationDirectionBack,
+};
+
 @interface SWDropdownAlertView()<UIDynamicAnimatorDelegate,UICollisionBehaviorDelegate>
 {
     NSArray *_settings;
@@ -18,7 +23,11 @@
 @property (weak, nonatomic) IBOutlet UIImageView *iconImageView;
 @property (weak, nonatomic) IBOutlet UILabel *messageLabel;
 @property (assign, nonatomic) SWDropdownAlertViewType alertViewType;
+@property (assign, nonatomic) SWDropdownAlertViewAnimationDirection animationDirection;
+
+@property (copy, nonatomic)   SWDropdownAlertViewCompletion completionBlock;
 @property (strong, nonatomic) UIView *maskView;
+
 
 @end
 
@@ -78,7 +87,12 @@ static NSString *kSWDropdownAlertViewBackgroundColor = @"background";
     if (duration < 0) {
         duration = 0;
     }
-//    self.duration = duration;
+    self.animationDirection = SWDropdownAlertViewAnimationDirectionDrop;
+    if (_animator.isRunning) {
+        [_animator removeAllBehaviors];
+    }
+    
+    self.completionBlock = completion;
     
     CGRect frame = self.frame;
     frame.origin.y -= frame.size.height;
@@ -95,17 +109,18 @@ static NSString *kSWDropdownAlertViewBackgroundColor = @"background";
     
     [keyWindow addSubview:_maskView];
     [keyWindow addSubview:self];
-//    if (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_7_1) {
-//        UIVisualEffect *visualEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
-//        UIVisualEffectView *blurView = [[UIVisualEffectView alloc] initWithEffect:visualEffect];
-//        blurView.frame = self.bounds;
-//        [self insertSubview:blurView atIndex:0];
-//    }
+    if (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_7_1) {
+        UIVisualEffect *visualEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
+        UIVisualEffectView *blurView = [[UIVisualEffectView alloc] initWithEffect:visualEffect];
+        blurView.frame = self.bounds;
+        [self insertSubview:blurView atIndex:0];
+    }
     [UIView animateWithDuration:0.25 animations:^{
         _maskView.alpha = 0.5;
     }];
     
     _animator = [[UIDynamicAnimator alloc] initWithReferenceView: keyWindow];
+    _animator.delegate = self;
     [keyWindow setWindowLevel:UIWindowLevelStatusBar + 1];
 
     UIGravityBehavior *gravity = [[UIGravityBehavior alloc] initWithItems:@[self]];
@@ -120,18 +135,18 @@ static NSString *kSWDropdownAlertViewBackgroundColor = @"background";
     elasticityBehavior.elasticity = 0.35f;
     [_animator addBehavior:elasticityBehavior];
     
-    __weak SWDropdownAlertView *weakSelf = self;
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-        if (completion) {
-            completion(_alertViewType);
-        }
-
-        if (duration > 0) {
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(duration * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                [weakSelf dismiss];
-            });
-        }
-    });
+//    __weak SWDropdownAlertView *weakSelf = self;
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+//        if (completion) {
+//            completion(_alertViewType);
+//        }
+//
+//        if (duration > 0) {
+//            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(duration * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//                [weakSelf dismiss];
+//            });
+//        }
+//    });
 }
 
 - (void)dismiss {
@@ -139,8 +154,10 @@ static NSString *kSWDropdownAlertViewBackgroundColor = @"background";
 }
 
 - (void)dismissWithCompletion:(SWDropdownAlertViewCompletion)completion{
+    self.animationDirection = SWDropdownAlertViewAnimationDirectionBack;
     UIGravityBehavior *gravity = [[UIGravityBehavior alloc] initWithItems:@[self]];
     gravity.gravityDirection = CGVectorMake(0, -1.5);
+    [_animator removeAllBehaviors];
     [_animator addBehavior:gravity];
     
     [UIView animateWithDuration:0.25 animations:^{
@@ -149,31 +166,45 @@ static NSString *kSWDropdownAlertViewBackgroundColor = @"background";
         [_maskView removeFromSuperview];
     }];
     
-    __weak SWDropdownAlertView *weakSelf = self;
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.25 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-        [_animator removeAllBehaviors];
-        [weakSelf removeFromSuperview];
-        
-        BOOL hasSWDropdownAlertView = NO;
-        UIWindow *keyWindow = [[UIApplication sharedApplication] keyWindow];
-        for (UIView *view in keyWindow.subviews) {
-            if ([view isKindOfClass:[SWDropdownAlertView class]]) {
-                hasSWDropdownAlertView = YES;
-            }
-        }
-        
-        if (!hasSWDropdownAlertView) {
-            [keyWindow setWindowLevel:UIWindowLevelNormal];
-        }
-        
-        if (completion) {
-            completion(_alertViewType);
-        }
-    });
 }
 
 - (void)maskViewDidClicked:(UITapGestureRecognizer*)tapGesture{
-    [self dismiss];
+    if (!_animator.isRunning) {
+        [self dismiss];
+    }
+
 }
 
+
+#pragma mark - UIDynamicAnimatorDelegate
+
+- (void)dynamicAnimatorDidPause:(UIDynamicAnimator *)animator{
+    if (self.animationDirection == SWDropdownAlertViewAnimationDirectionBack) {
+            [_animator removeAllBehaviors];
+            [self removeFromSuperview];
+            
+            BOOL hasSWDropdownAlertView = NO;
+            UIWindow *keyWindow = [[UIApplication sharedApplication] keyWindow];
+            for (UIView *view in keyWindow.subviews) {
+                if ([view isKindOfClass:[SWDropdownAlertView class]]) {
+                    hasSWDropdownAlertView = YES;
+                }
+            }
+            
+            if (!hasSWDropdownAlertView) {
+                [keyWindow setWindowLevel:UIWindowLevelNormal];
+            }
+            
+            if (self.completionBlock) {
+                self.completionBlock(self.alertViewType);
+                self.completionBlock = nil;
+            }
+    }else{
+        if (self.completionBlock) {
+            self.completionBlock(self.alertViewType);
+            self.completionBlock = nil;
+        }
+    }
+    
+}
 @end

@@ -34,7 +34,4 @@ typedef void (^SWDropdownAlertViewCompletion)(SWDropdownAlertViewType type);
 - (void)showWithDuration:(CGFloat)duration;
 - (void)showWithCompletion:(SWDropdownAlertViewCompletion)completion withDuration:(CGFloat)duration;
 
-
-- (void)dismiss;
-- (void)dismissWithCompletion:(SWDropdownAlertViewCompletion)completion;
 @end

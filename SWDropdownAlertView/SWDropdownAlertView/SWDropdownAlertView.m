@@ -24,9 +24,9 @@ typedef NS_ENUM(NSUInteger, SWDropdownAlertViewAnimationDirection) {
 @property (weak, nonatomic) IBOutlet UILabel *messageLabel;
 @property (assign, nonatomic) SWDropdownAlertViewType alertViewType;
 @property (assign, nonatomic) SWDropdownAlertViewAnimationDirection animationDirection;
-
-@property (copy, nonatomic)   SWDropdownAlertViewCompletion completionBlock;
+@property (copy, nonatomic) SWDropdownAlertViewCompletion completionBlock;
 @property (strong, nonatomic) UIView *maskView;
+@property (assign, nonatomic) CGFloat duration;
 
 
 @end
@@ -87,6 +87,8 @@ static NSString *kSWDropdownAlertViewBackgroundColor = @"background";
     if (duration < 0) {
         duration = 0;
     }
+    self.duration = duration;
+
     self.animationDirection = SWDropdownAlertViewAnimationDirectionDrop;
     if (_animator.isRunning) {
         [_animator removeAllBehaviors];
@@ -140,7 +142,7 @@ static NSString *kSWDropdownAlertViewBackgroundColor = @"background";
 //        if (completion) {
 //            completion(_alertViewType);
 //        }
-//
+
 //        if (duration > 0) {
 //            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(duration * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
 //                [weakSelf dismiss];
@@ -204,6 +206,13 @@ static NSString *kSWDropdownAlertViewBackgroundColor = @"background";
             self.completionBlock(self.alertViewType);
             self.completionBlock = nil;
         }
+        if (self.duration > 0) {
+            __weak SWDropdownAlertView *weakSelf = self;
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(self.duration * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [weakSelf dismiss];
+            });
+        }
+
     }
     
 }

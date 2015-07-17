@@ -22,7 +22,6 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 
@@ -36,7 +35,7 @@
     [alertView showWithCompletion:^(SWDropdownAlertViewType type){
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"这是警告" message:@"在SWDropdownAlertView跳出后执行" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
         [alertView show];
-    }];
+    } withDuration:1.5];
 }
 
 - (IBAction)showError:(id)sender{

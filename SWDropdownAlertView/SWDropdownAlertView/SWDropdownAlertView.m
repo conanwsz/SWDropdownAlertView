@@ -162,6 +162,35 @@ static NSString *kSWDropdownAlertViewBackgroundColor = @"background";
     [_animator removeAllBehaviors];
     [_animator addBehavior:gravity];
     
+    
+//    UICollisionBehavior *collision = [[UICollisionBehavior alloc] initWithItems:@[self]];
+//    collision.translatesReferenceBoundsIntoBoundary = NO;
+//    [collision addBoundaryWithIdentifier:@"notificationEnd" fromPoint:CGPointMake(0, -70) toPoint:CGPointMake([[UIScreen mainScreen] bounds].size.width, -70)];
+//    [_animator addBehavior:collision];
+    
+    __weak SWDropdownAlertView *weakSelf = self;
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.25 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+        [_animator removeAllBehaviors];
+        [weakSelf removeFromSuperview];
+        
+        BOOL hasSWDropdownAlertView = NO;
+        UIWindow *keyWindow = [[UIApplication sharedApplication] keyWindow];
+        for (UIView *view in keyWindow.subviews) {
+            if ([view isKindOfClass:[SWDropdownAlertView class]]) {
+                hasSWDropdownAlertView = YES;
+            }
+        }
+        
+        if (!hasSWDropdownAlertView) {
+            [keyWindow setWindowLevel:UIWindowLevelNormal];
+        }
+        
+        if (completion) {
+            completion(_alertViewType);
+        }
+    });
+
+    
     [UIView animateWithDuration:0.25 animations:^{
         _maskView.alpha = 0;
     } completion:^(BOOL finishied){

@@ -52,9 +52,9 @@ static NSString *kSWDropdownAlertViewBackgroundColor = @"background";
                     kSWDropdownAlertViewBackgroundColor : @"#ff6d00"},
                   @{kSWDropdownAlertViewIconImage : @"IconError",
                     kSWDropdownAlertViewBackgroundColor : @"#ff3d00"},
-                ];
+                  ];
     self.alertViewType = type;
-
+    
     CGRect frame = self.frame;
     frame.size.width = [UIScreen mainScreen].bounds.size.width + 1;
     frame.size.height = 64;
@@ -88,7 +88,7 @@ static NSString *kSWDropdownAlertViewBackgroundColor = @"background";
         duration = 0;
     }
     self.duration = duration;
-
+    
     self.animationDirection = SWDropdownAlertViewAnimationDirectionDrop;
     if (_animator.isRunning) {
         [_animator removeAllBehaviors];
@@ -124,7 +124,7 @@ static NSString *kSWDropdownAlertViewBackgroundColor = @"background";
     _animator = [[UIDynamicAnimator alloc] initWithReferenceView: keyWindow];
     _animator.delegate = self;
     [keyWindow setWindowLevel:UIWindowLevelStatusBar + 1];
-
+    
     UIGravityBehavior *gravity = [[UIGravityBehavior alloc] initWithItems:@[self]];
     [_animator addBehavior:gravity];
     
@@ -137,18 +137,18 @@ static NSString *kSWDropdownAlertViewBackgroundColor = @"background";
     elasticityBehavior.elasticity = 0.35f;
     [_animator addBehavior:elasticityBehavior];
     
-//    __weak SWDropdownAlertView *weakSelf = self;
-//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-//        if (completion) {
-//            completion(_alertViewType);
-//        }
-
-//        if (duration > 0) {
-//            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(duration * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//                [weakSelf dismiss];
-//            });
-//        }
-//    });
+    //    __weak SWDropdownAlertView *weakSelf = self;
+    //    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+    //        if (completion) {
+    //            completion(_alertViewType);
+    //        }
+    
+    //        if (duration > 0) {
+    //            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(duration * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    //                [weakSelf dismiss];
+    //            });
+    //        }
+    //    });
 }
 
 - (void)dismiss {
@@ -160,13 +160,21 @@ static NSString *kSWDropdownAlertViewBackgroundColor = @"background";
     UIGravityBehavior *gravity = [[UIGravityBehavior alloc] initWithItems:@[self]];
     gravity.gravityDirection = CGVectorMake(0, -1.5);
     [_animator removeAllBehaviors];
-    [_animator addBehavior:gravity];
+    @try {
+        [_animator addBehavior:gravity];
+    }
+    @catch (NSException *exception) {
+        NSLog(@"%@",exception);
+    }
+    @finally {
+        
+    }
     
     
-//    UICollisionBehavior *collision = [[UICollisionBehavior alloc] initWithItems:@[self]];
-//    collision.translatesReferenceBoundsIntoBoundary = NO;
-//    [collision addBoundaryWithIdentifier:@"notificationEnd" fromPoint:CGPointMake(0, -70) toPoint:CGPointMake([[UIScreen mainScreen] bounds].size.width, -70)];
-//    [_animator addBehavior:collision];
+    //    UICollisionBehavior *collision = [[UICollisionBehavior alloc] initWithItems:@[self]];
+    //    collision.translatesReferenceBoundsIntoBoundary = NO;
+    //    [collision addBoundaryWithIdentifier:@"notificationEnd" fromPoint:CGPointMake(0, -70) toPoint:CGPointMake([[UIScreen mainScreen] bounds].size.width, -70)];
+    //    [_animator addBehavior:collision];
     
     __weak SWDropdownAlertView *weakSelf = self;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.25 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
@@ -189,7 +197,7 @@ static NSString *kSWDropdownAlertViewBackgroundColor = @"background";
             completion(_alertViewType);
         }
     });
-
+    
     
     [UIView animateWithDuration:0.25 animations:^{
         _maskView.alpha = 0;
@@ -203,7 +211,7 @@ static NSString *kSWDropdownAlertViewBackgroundColor = @"background";
     if (!_animator.isRunning) {
         [self dismiss];
     }
-
+    
 }
 
 
@@ -211,25 +219,25 @@ static NSString *kSWDropdownAlertViewBackgroundColor = @"background";
 
 - (void)dynamicAnimatorDidPause:(UIDynamicAnimator *)animator{
     if (self.animationDirection == SWDropdownAlertViewAnimationDirectionBack) {
-            [_animator removeAllBehaviors];
-            [self removeFromSuperview];
-            
-            BOOL hasSWDropdownAlertView = NO;
-            UIWindow *keyWindow = [[UIApplication sharedApplication] keyWindow];
-            for (UIView *view in keyWindow.subviews) {
-                if ([view isKindOfClass:[SWDropdownAlertView class]]) {
-                    hasSWDropdownAlertView = YES;
-                }
+        [_animator removeAllBehaviors];
+        [self removeFromSuperview];
+        
+        BOOL hasSWDropdownAlertView = NO;
+        UIWindow *keyWindow = [[UIApplication sharedApplication] keyWindow];
+        for (UIView *view in keyWindow.subviews) {
+            if ([view isKindOfClass:[SWDropdownAlertView class]]) {
+                hasSWDropdownAlertView = YES;
             }
-            
-            if (!hasSWDropdownAlertView) {
-                [keyWindow setWindowLevel:UIWindowLevelNormal];
-            }
-            
-            if (self.completionBlock) {
-                self.completionBlock(self.alertViewType);
-                self.completionBlock = nil;
-            }
+        }
+        
+        if (!hasSWDropdownAlertView) {
+            [keyWindow setWindowLevel:UIWindowLevelNormal];
+        }
+        
+        if (self.completionBlock) {
+            self.completionBlock(self.alertViewType);
+            self.completionBlock = nil;
+        }
     }else{
         if (self.completionBlock) {
             self.completionBlock(self.alertViewType);
@@ -241,7 +249,7 @@ static NSString *kSWDropdownAlertViewBackgroundColor = @"background";
                 [weakSelf dismiss];
             });
         }
-
+        
     }
     
 }

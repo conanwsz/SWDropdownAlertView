@@ -100,7 +100,19 @@ static NSString *kSWDropdownAlertViewBackgroundColor = @"background";
     frame.origin.y -= frame.size.height;
     self.frame = frame;
     
-    UIWindow *keyWindow = [[UIApplication sharedApplication] keyWindow];
+    NSArray *windows = [[UIApplication sharedApplication] windows];
+    
+    UIWindow *keyWindow;
+    
+    for (UIWindow *window in windows) {
+        if ([window isKindOfClass:[UIWindow class]]) {
+            keyWindow = window;
+        }
+    }
+    
+    if (!keyWindow) {
+        return;
+    }
     
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(maskViewDidClicked:)];
     

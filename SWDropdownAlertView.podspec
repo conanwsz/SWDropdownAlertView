@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "SWDropdownAlertView"
-  s.version      = "0.3.2"
+  s.version      = "0.3.3"
   s.summary      = "SWDropdownAlertView"
 
   s.description  = <<-DESC
@@ -14,7 +14,7 @@ Pod::Spec.new do |s|
 
   s.author       = { "conanwsz" => "conanwsz@gmail.com" }
   s.platform     = :ios, "7.0"
-  s.source       = { :git  => "https://github.com/conanwsz/SWDropdownAlertView.git", :tag => '0.3.2' }
+  s.source       = { :git  => "https://github.com/conanwsz/SWDropdownAlertView.git", :tag => '0.3.3' }
   s.source_files  = ["SWDropdownAlertView/SWDropdownAlertView/*.{m,h}"]
   s.resources  = ["SWDropdownAlertView/SWDropdownAlertView/*.xib","SWDropdownAlertView/Images.xcassets"]
 

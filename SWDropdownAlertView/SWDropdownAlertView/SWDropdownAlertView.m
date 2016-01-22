@@ -61,6 +61,22 @@ static NSString *kSWDropdownAlertViewBackgroundColor = @"background";
     frame.origin.x = -1;
     self.frame = frame;
     
+    if (!message.length) {
+        switch (type) {
+            case SWDropdownAlertViewTypeDone:
+                message = @"执行成功";
+                break;
+            case SWDropdownAlertViewTypeWarning:
+                message = @"未知警告";
+                break;
+            case SWDropdownAlertViewTypeError:
+                message = @"未知错误";
+                break;
+            default:
+                break;
+        }
+    }
+    
     NSDictionary *setting = _settings[type];
     self.messageLabel.text = message;
     self.iconImageView.image = [UIImage imageNamed:setting[kSWDropdownAlertViewIconImage]];

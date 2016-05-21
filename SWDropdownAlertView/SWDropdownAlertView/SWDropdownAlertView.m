@@ -37,6 +37,9 @@ static NSString *kSWDropdownAlertViewBackgroundColor = @"background";
 @implementation SWDropdownAlertView
 
 + (SWDropdownAlertView*)alertViewWithMessage:(NSString*)message withType:(SWDropdownAlertViewType)type{
+    if (!message.length) {
+        return nil;
+    }
     SWDropdownAlertView *alertView = [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:nil options:nil] objectAtIndex:0];
     
     [alertView alertViewWithMessage:message withType:type];
@@ -121,7 +124,7 @@ static NSString *kSWDropdownAlertViewBackgroundColor = @"background";
     UIWindow *keyWindow;
     
     for (UIWindow *window in windows) {
-        if ([window isKindOfClass:[UIWindow class]]) {
+        if ([window isMemberOfClass:[UIWindow class]]) {
             keyWindow = window;
         }
     }

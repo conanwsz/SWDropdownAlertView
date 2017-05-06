@@ -119,16 +119,7 @@ static NSString *kSWDropdownAlertViewBackgroundColor = @"background";
     frame.origin.y -= frame.size.height;
     self.frame = frame;
     
-    NSArray *windows = [[UIApplication sharedApplication] windows];
-    
-    UIWindow *keyWindow;
-    
-    for (UIWindow *window in windows) {
-        if ([window isMemberOfClass:[UIWindow class]]) {
-            keyWindow = window;
-        }
-    }
-    
+    UIWindow *keyWindow = [self keyWindow];
     if (!keyWindow) {
         return;
     }
@@ -213,7 +204,10 @@ static NSString *kSWDropdownAlertViewBackgroundColor = @"background";
         [weakSelf removeFromSuperview];
         
         BOOL hasSWDropdownAlertView = NO;
-        UIWindow *keyWindow = [[UIApplication sharedApplication] keyWindow];
+        UIWindow *keyWindow = [self keyWindow];
+        if (!keyWindow) {
+            return;
+        }
         for (UIView *view in keyWindow.subviews) {
             if ([view isKindOfClass:[SWDropdownAlertView class]]) {
                 hasSWDropdownAlertView = YES;
@@ -254,7 +248,10 @@ static NSString *kSWDropdownAlertViewBackgroundColor = @"background";
         [self removeFromSuperview];
         
         BOOL hasSWDropdownAlertView = NO;
-        UIWindow *keyWindow = [[UIApplication sharedApplication] keyWindow];
+        UIWindow *keyWindow = [self keyWindow];
+        if (!keyWindow) {
+            return;
+        }
         for (UIView *view in keyWindow.subviews) {
             if ([view isKindOfClass:[SWDropdownAlertView class]]) {
                 hasSWDropdownAlertView = YES;
@@ -283,5 +280,20 @@ static NSString *kSWDropdownAlertViewBackgroundColor = @"background";
         
     }
     
+}
+
+#pragma mark - Private
+- (UIWindow *)keyWindow{
+    UIWindow *keyWindow = nil;
+    NSArray *windows = [[UIApplication sharedApplication] windows];
+    
+    for (UIWindow *window in windows) {
+        if ([window isMemberOfClass:[UIWindow class]]) {
+            keyWindow = window;
+        }
+    }
+    
+    return keyWindow;
+
 }
 @end

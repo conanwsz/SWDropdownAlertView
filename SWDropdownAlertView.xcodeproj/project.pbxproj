@@ -443,6 +443,7 @@
 				A8035D061AAFF2430026D448 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A8035D071AAFF2430026D448 /* Build configuration list for PBXNativeTarget "SWDropdownAlertViewTests" */ = {
 			isa = XCConfigurationList;
@@ -451,6 +452,7 @@
 				A8035D091AAFF2430026D448 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -26,8 +26,18 @@
 
 
 - (IBAction)showAlertView:(id)sender{
-    SWDropdownAlertView *alertView = [SWDropdownAlertView alertViewWithMessage:@"这是测试" withType:SWDropdownAlertViewTypeDone];
+    SWDropdownAlertView *alertView = [SWDropdownAlertView alertViewWithMessage:@"这是测试1" withType:SWDropdownAlertViewTypeDone];
     [alertView showWithDuration:2];
+    
+    
+    SWDropdownAlertView *alertView2 = [SWDropdownAlertView alertViewWithMessage:@"这是测试2" withType:SWDropdownAlertViewTypeDone];
+    [alertView2 showWithDuration:2];
+    
+    SWDropdownAlertView *alertView3 = [SWDropdownAlertView alertViewWithMessage:@"这是测试3" withType:SWDropdownAlertViewTypeDone];
+    [alertView3 showWithDuration:2];
+    
+    SWDropdownAlertView *alertView4 = [SWDropdownAlertView alertViewWithMessage:@"这是测试4" withType:SWDropdownAlertViewTypeDone];
+    [alertView4 showWithDuration:2];
 }
 
 - (IBAction)showWarning:(id)sender{

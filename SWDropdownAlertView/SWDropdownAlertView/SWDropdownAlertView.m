@@ -1,10 +1,10 @@
-//
-//  SWDropdownAlertView.m
-//  SWDropdownAlertView
-//
-//  Created by 汪顺舟 on 3/11/15.
-//  Copyright (c) 2015 HXQC. All rights reserved.
-//
+    //
+    //  SWDropdownAlertView.m
+    //  SWDropdownAlertView
+    //
+    //  Created by 汪顺舟 on 3/11/15.
+    //  Copyright (c) 2015 HXQC. All rights reserved.
+    //
 
 
 #import "UIColor+HexColor.h"
@@ -33,6 +33,8 @@ typedef NS_ENUM(NSUInteger, SWDropdownAlertViewAnimationDirection) {
 
 static NSString *kSWDropdownAlertViewIconImage = @"image";
 static NSString *kSWDropdownAlertViewBackgroundColor = @"background";
+static BOOL appeared = NO;
+
 
 @implementation SWDropdownAlertView
 
@@ -40,6 +42,10 @@ static NSString *kSWDropdownAlertViewBackgroundColor = @"background";
     if (!message.length) {
         return nil;
     }
+    if (appeared) {
+        return nil;
+    }
+    
     SWDropdownAlertView *alertView = [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:nil options:nil] objectAtIndex:0];
     
     [alertView alertViewWithMessage:message withType:type];
@@ -133,6 +139,7 @@ static NSString *kSWDropdownAlertViewBackgroundColor = @"background";
     
     [keyWindow addSubview:_maskView];
     [keyWindow addSubview:self];
+    appeared = YES;
     if (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_7_1) {
         UIVisualEffect *visualEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
         UIVisualEffectView *blurView = [[UIVisualEffectView alloc] initWithEffect:visualEffect];
@@ -159,18 +166,18 @@ static NSString *kSWDropdownAlertViewBackgroundColor = @"background";
     elasticityBehavior.elasticity = 0.35f;
     [_animator addBehavior:elasticityBehavior];
     
-    //    __weak SWDropdownAlertView *weakSelf = self;
-    //    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-    //        if (completion) {
-    //            completion(_alertViewType);
-    //        }
+        //    __weak SWDropdownAlertView *weakSelf = self;
+        //    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+        //        if (completion) {
+        //            completion(_alertViewType);
+        //        }
     
-    //        if (duration > 0) {
-    //            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(duration * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-    //                [weakSelf dismiss];
-    //            });
-    //        }
-    //    });
+        //        if (duration > 0) {
+        //            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(duration * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        //                [weakSelf dismiss];
+        //            });
+        //        }
+        //    });
 }
 
 - (void)dismiss {
@@ -193,16 +200,15 @@ static NSString *kSWDropdownAlertViewBackgroundColor = @"background";
     }
     
     
-    //    UICollisionBehavior *collision = [[UICollisionBehavior alloc] initWithItems:@[self]];
-    //    collision.translatesReferenceBoundsIntoBoundary = NO;
-    //    [collision addBoundaryWithIdentifier:@"notificationEnd" fromPoint:CGPointMake(0, -70) toPoint:CGPointMake([[UIScreen mainScreen] bounds].size.width, -70)];
-    //    [_animator addBehavior:collision];
+        //    UICollisionBehavior *collision = [[UICollisionBehavior alloc] initWithItems:@[self]];
+        //    collision.translatesReferenceBoundsIntoBoundary = NO;
+        //    [collision addBoundaryWithIdentifier:@"notificationEnd" fromPoint:CGPointMake(0, -70) toPoint:CGPointMake([[UIScreen mainScreen] bounds].size.width, -70)];
+        //    [_animator addBehavior:collision];
     
     __weak SWDropdownAlertView *weakSelf = self;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.25 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
         [_animator removeAllBehaviors];
         [weakSelf removeFromSuperview];
-        
         BOOL hasSWDropdownAlertView = NO;
         UIWindow *keyWindow = [self keyWindow];
         if (!keyWindow) {
@@ -217,7 +223,7 @@ static NSString *kSWDropdownAlertViewBackgroundColor = @"background";
         if (!hasSWDropdownAlertView) {
             [keyWindow setWindowLevel:UIWindowLevelNormal];
         }
-        
+        appeared = NO;
         if (completion) {
             completion(_alertViewType);
         }
@@ -294,6 +300,6 @@ static NSString *kSWDropdownAlertViewBackgroundColor = @"background";
     }
     
     return keyWindow;
-
+    
 }
 @end

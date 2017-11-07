@@ -46,7 +46,7 @@ static BOOL appeared = NO;
         return nil;
     }
     
-    SWDropdownAlertView *alertView = [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:nil options:nil] objectAtIndex:0];
+    SWDropdownAlertView *alertView = [[[NSBundle bundleForClass:self.class] loadNibNamed:NSStringFromClass([self class]) owner:nil options:nil] objectAtIndex:0];
     
     [alertView alertViewWithMessage:message withType:type];
     

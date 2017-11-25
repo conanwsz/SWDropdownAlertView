@@ -7,7 +7,7 @@
 //
 
 #import "ViewController.h"
-#import "SWDropdownAlertView.h"
+#import <SWDropdownAlertView/SWDropdownAlertView.h>
 
 @interface ViewController ()
 

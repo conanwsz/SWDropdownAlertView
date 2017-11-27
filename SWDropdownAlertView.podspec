@@ -14,14 +14,14 @@ Pod::Spec.new do |s|
 
   s.author       = { "conanwsz" => "conanwsz@gmail.com" }
   s.platform     = :ios, "7.0"
-  s.source       = { :git  => "https://github.com/conanwsz/SWDropdownAlertView.git", :tag => '#{s.version}' }
+  s.source       = { :git  => "https://github.com/conanwsz/SWDropdownAlertView.git", :tag => "#{s.version}" }
 
   if ENV['Source']
     s.source_files  = ["SWDropdownAlertView/*.{m,h}"]
     s.resources  = ["SWDropdownAlertView/*.xib","SWDropdownAlertView/Images.xcassets"]
   else
     s.source_files  = ["SWDropdownAlertView/SWDropdownAlertView.h"]
-    s.vendored_frameworks = 'Carthage/Build/iOS/SWDropdownAlertView.framework'
+    s.vendored_framework = 'Carthage/Build/iOS/SWDropdownAlertView.framework'
   end
   # s.xcconfig = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/libxml2" }
 

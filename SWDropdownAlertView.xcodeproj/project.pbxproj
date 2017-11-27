@@ -14,7 +14,6 @@
 		A8035CF51AAFF2430026D448 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8035CF31AAFF2430026D448 /* LaunchScreen.xib */; };
 		A84A966E1FC95D300074E73B /* SWDropdownAlertView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A84A96671FC95D300074E73B /* SWDropdownAlertView.framework */; };
 		A84A966F1FC95D300074E73B /* SWDropdownAlertView.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A84A96671FC95D300074E73B /* SWDropdownAlertView.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		A84A967A1FC95D650074E73B /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A84A96741FC95D650074E73B /* Info.plist */; };
 		A84A967B1FC95D650074E73B /* SWDropdownAlertView.h in Headers */ = {isa = PBXBuildFile; fileRef = A84A96751FC95D650074E73B /* SWDropdownAlertView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A84A967C1FC95D650074E73B /* SWDropdownAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = A84A96761FC95D650074E73B /* SWDropdownAlertView.m */; };
 		A84A967D1FC95D650074E73B /* SWDropdownAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A84A96771FC95D650074E73B /* SWDropdownAlertView.xib */; };
@@ -253,7 +252,6 @@
 			files = (
 				A84A96821FC95E920074E73B /* Images.xcassets in Resources */,
 				A84A967D1FC95D650074E73B /* SWDropdownAlertView.xib in Resources */,
-				A84A967A1FC95D650074E73B /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -448,7 +446,7 @@
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = SWDropdownAlertView/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.hxqc.SWDropdownAlertView;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
@@ -489,7 +487,7 @@
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = SWDropdownAlertView/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.hxqc.SWDropdownAlertView;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";

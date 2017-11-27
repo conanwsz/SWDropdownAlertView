@@ -88,7 +88,7 @@ static BOOL appeared = NO;
     
     NSDictionary *setting = _settings[type];
     self.messageLabel.text = message;
-    self.iconImageView.image = [UIImage imageNamed:setting[kSWDropdownAlertViewIconImage]];
+    self.iconImageView.image = [UIImage imageNamed:setting[kSWDropdownAlertViewIconImage] inBundle:[NSBundle bundleForClass:self.class] compatibleWithTraitCollection:nil];
     self.backgroundColor = [UIColor colorWithHexString:setting[kSWDropdownAlertViewBackgroundColor]];
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismiss)];

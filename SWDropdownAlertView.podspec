@@ -14,7 +14,7 @@ Pod::Spec.new do |s|
 
   s.author       = { "conanwsz" => "conanwsz@gmail.com" }
   s.platform     = :ios, "7.0"
-  s.source       = { :git  => "https://github.com/conanwsz/SWDropdownAlertView.git", :tag => '0.3.9' }
+  s.source       = { :git  => "https://github.com/conanwsz/SWDropdownAlertView.git", :tag => '#{s.version}' }
 
   if ENV['Source']
     s.source_files  = ["SWDropdownAlertView/*.{m,h}"]

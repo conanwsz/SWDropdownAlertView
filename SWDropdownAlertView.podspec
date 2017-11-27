@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "SWDropdownAlertView"
-  s.version      = "0.3.9"
+  s.version      = "0.4.0"
   s.summary      = "SWDropdownAlertView"
 
   s.description  = <<-DESC
@@ -20,7 +20,7 @@ Pod::Spec.new do |s|
     s.source_files  = ["SWDropdownAlertView/*.{m,h}"]
     s.resources  = ["SWDropdownAlertView/*.xib","SWDropdownAlertView/Images.xcassets"]
   else
-    s.source_files  = ["SWDropdownAlertView/SWDropdownAlertView.h"]
+    # s.source_files  = ["SWDropdownAlertView/SWDropdownAlertView.h"]
     s.vendored_frameworks = ["Carthage/Build/iOS/SWDropdownAlertView.framework"]
   end
   # s.xcconfig = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/libxml2" }

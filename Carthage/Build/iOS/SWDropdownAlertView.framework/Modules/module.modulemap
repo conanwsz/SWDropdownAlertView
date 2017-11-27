@@ -1,0 +1,6 @@
+framework module SWDropdownAlertView {
+  umbrella header "SWDropdownAlertView.h"
+
+  export *
+  module * { export * }
+}

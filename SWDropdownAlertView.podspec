@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   s.platform     = :ios, "8.0"
   s.source       = { :git  => "https://github.com/conanwsz/SWDropdownAlertView.git", :tag => "#{s.version}" }
 
-  if ENV['Source']
+  if ENV['Source'] || ENV["#{s.name}Source"]
     s.source_files  = ["SWDropdownAlertView/*.{m,h}"]
     s.resources  = ["SWDropdownAlertView/*.xib","SWDropdownAlertView/Images.xcassets"]
   else

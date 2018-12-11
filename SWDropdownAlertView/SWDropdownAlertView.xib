@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_0" orientation="landscape">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment version="2048" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <deployment version="2304" identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -23,7 +24,7 @@
                     </constraints>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="这是提示框" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qe3-ga-jeg">
-                    <rect key="frame" x="52" y="23.5" width="71.5" height="17"/>
+                    <rect key="frame" x="52" y="23.5" width="278" height="17"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
@@ -32,12 +33,41 @@
             </subviews>
             <color key="backgroundColor" red="1" green="0.6554072997" blue="0.49456127439999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="I4b-Mt-eNQ" firstAttribute="centerY" secondItem="Zkf-Uk-09Q" secondAttribute="centerY" priority="999" constant="-10" id="1Di-a8-OCu"/>
+                <constraint firstItem="I4b-Mt-eNQ" firstAttribute="leading" secondItem="Zkf-Uk-09Q" secondAttribute="leading" constant="20" id="6Ha-9O-dmg"/>
                 <constraint firstItem="Qe3-ga-jeg" firstAttribute="leading" secondItem="I4b-Mt-eNQ" secondAttribute="trailing" constant="8" id="814-Cr-iyu"/>
-                <constraint firstItem="I4b-Mt-eNQ" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="Bld-jx-QyC"/>
-                <constraint firstAttribute="bottom" secondItem="I4b-Mt-eNQ" secondAttribute="bottom" constant="20" id="WtD-Yp-sSN"/>
+                <constraint firstItem="Zkf-Uk-09Q" firstAttribute="trailing" secondItem="Qe3-ga-jeg" secondAttribute="trailing" constant="20" id="Ccm-Ao-jNW"/>
                 <constraint firstItem="Qe3-ga-jeg" firstAttribute="centerY" secondItem="I4b-Mt-eNQ" secondAttribute="centerY" id="mXp-ac-gPx"/>
+                <constraint firstItem="I4b-Mt-eNQ" firstAttribute="centerY" secondItem="Zkf-Uk-09Q" secondAttribute="centerY" id="ui0-MD-7Ch"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="Zkf-Uk-09Q"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="1Di-a8-OCu"/>
+                    <exclude reference="ui0-MD-7Ch"/>
+                </mask>
+            </variation>
+            <variation key="heightClass=compact-widthClass=compact">
+                <mask key="constraints">
+                    <include reference="ui0-MD-7Ch"/>
+                </mask>
+            </variation>
+            <variation key="heightClass=compact-widthClass=regular">
+                <mask key="constraints">
+                    <include reference="ui0-MD-7Ch"/>
+                </mask>
+            </variation>
+            <variation key="heightClass=regular-widthClass=compact">
+                <mask key="constraints">
+                    <include reference="1Di-a8-OCu"/>
+                </mask>
+            </variation>
+            <variation key="heightClass=regular-widthClass=regular">
+                <mask key="constraints">
+                    <include reference="ui0-MD-7Ch"/>
+                </mask>
+            </variation>
             <connections>
                 <outlet property="iconImageView" destination="I4b-Mt-eNQ" id="THx-1B-7M3"/>
                 <outlet property="messageLabel" destination="Qe3-ga-jeg" id="m4P-lO-1Zd"/>

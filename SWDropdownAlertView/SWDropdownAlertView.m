@@ -9,6 +9,9 @@
 
 #import "UIColor+HexColor.h"
 #import "SWDropdownAlertView.h"
+
+#define alertHeight [[UIApplication sharedApplication] statusBarFrame].size.height + 44
+
 typedef NS_ENUM(NSUInteger, SWDropdownAlertViewAnimationDirection) {
     SWDropdownAlertViewAnimationDirectionDrop = 0,
     SWDropdownAlertViewAnimationDirectionBack,
@@ -34,7 +37,6 @@ typedef NS_ENUM(NSUInteger, SWDropdownAlertViewAnimationDirection) {
 static NSString *kSWDropdownAlertViewIconImage = @"image";
 static NSString *kSWDropdownAlertViewBackgroundColor = @"background";
 static BOOL appeared = NO;
-
 
 @implementation SWDropdownAlertView
 
@@ -66,7 +68,7 @@ static BOOL appeared = NO;
     
     CGRect frame = self.frame;
     frame.size.width = [UIScreen mainScreen].bounds.size.width + 1;
-    frame.size.height = 64;
+    frame.size.height = alertHeight;
     frame.origin.x = -1;
     self.frame = frame;
     
@@ -159,7 +161,7 @@ static BOOL appeared = NO;
     
     UICollisionBehavior *collision = [[UICollisionBehavior alloc] initWithItems:@[self]];
     collision.translatesReferenceBoundsIntoBoundary = NO;
-    [collision addBoundaryWithIdentifier:@"notificationEnd" fromPoint:CGPointMake(0, 65) toPoint:CGPointMake([[UIScreen mainScreen] bounds].size.width, 65)];
+    [collision addBoundaryWithIdentifier:@"notificationEnd" fromPoint:CGPointMake(0, alertHeight + 1) toPoint:CGPointMake([[UIScreen mainScreen] bounds].size.width, alertHeight + 1)];
     [_animator addBehavior:collision];
     
     UIDynamicItemBehavior *elasticityBehavior = [[UIDynamicItemBehavior alloc] initWithItems:@[self]];

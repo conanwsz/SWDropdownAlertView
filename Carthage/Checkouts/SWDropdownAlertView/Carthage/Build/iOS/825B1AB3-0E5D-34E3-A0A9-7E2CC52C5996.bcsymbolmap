@@ -1,0 +1,77 @@
+BCSymbolMap Version: 2.0
++[SWDropdownAlertView alertViewWithMessage:withType:]
+-[SWDropdownAlertView alertViewWithMessage:withType:]
+-[SWDropdownAlertView show]
+-[SWDropdownAlertView showWithCompletion:]
+-[SWDropdownAlertView showWithDuration:]
+-[SWDropdownAlertView showWithCompletion:withDuration:]
+___55-[SWDropdownAlertView showWithCompletion:withDuration:]_block_invoke
+___copy_helper_block_
+___destroy_helper_block_
+-[SWDropdownAlertView dismiss]
+-[SWDropdownAlertView dismissWithCompletion:]
+___45-[SWDropdownAlertView dismissWithCompletion:]_block_invoke
+___copy_helper_block_.154
+___destroy_helper_block_.155
+___45-[SWDropdownAlertView dismissWithCompletion:]_block_invoke.157
+___copy_helper_block_.158
+___destroy_helper_block_.159
+___45-[SWDropdownAlertView dismissWithCompletion:]_block_invoke.161
+___copy_helper_block_.162
+___destroy_helper_block_.163
+-[SWDropdownAlertView maskViewDidClicked:]
+-[SWDropdownAlertView dynamicAnimatorDidPause:]
+___47-[SWDropdownAlertView dynamicAnimatorDidPause:]_block_invoke
+___copy_helper_block_.176
+___destroy_helper_block_.177
+-[SWDropdownAlertView keyWindow]
+-[SWDropdownAlertView iconImageView]
+-[SWDropdownAlertView setIconImageView:]
+-[SWDropdownAlertView messageLabel]
+-[SWDropdownAlertView setMessageLabel:]
+-[SWDropdownAlertView alertViewType]
+-[SWDropdownAlertView setAlertViewType:]
+-[SWDropdownAlertView animationDirection]
+-[SWDropdownAlertView setAnimationDirection:]
+-[SWDropdownAlertView completionBlock]
+-[SWDropdownAlertView setCompletionBlock:]
+-[SWDropdownAlertView maskView]
+-[SWDropdownAlertView setMaskView:]
+-[SWDropdownAlertView duration]
+-[SWDropdownAlertView setDuration:]
+-[SWDropdownAlertView .cxx_destruct]
+_appeared
+_OBJC_IVAR_$_SWDropdownAlertView._settings
+_OBJC_IVAR_$_SWDropdownAlertView._animator
+_OBJC_IVAR_$_SWDropdownAlertView._maskView
+___block_descriptor_tmp
+_OBJC_IVAR_$_SWDropdownAlertView._alertViewType
+___block_descriptor_tmp.156
+___block_descriptor_tmp.160
+___block_descriptor_tmp.165
+___block_descriptor_tmp.178
+_OBJC_IVAR_$_SWDropdownAlertView._iconImageView
+_OBJC_IVAR_$_SWDropdownAlertView._messageLabel
+_OBJC_IVAR_$_SWDropdownAlertView._animationDirection
+_OBJC_IVAR_$_SWDropdownAlertView._completionBlock
+_OBJC_IVAR_$_SWDropdownAlertView._duration
+l_OBJC_PROTOCOL_$_NSObject
+l_OBJC_LABEL_PROTOCOL_$_NSObject
+l_OBJC_PROTOCOL_$_UIDynamicAnimatorDelegate
+l_OBJC_LABEL_PROTOCOL_$_UIDynamicAnimatorDelegate
+l_OBJC_PROTOCOL_$_UICollisionBehaviorDelegate
+l_OBJC_LABEL_PROTOCOL_$_UICollisionBehaviorDelegate
+Apple LLVM version 9.0.0 (clang-900.0.38)
+/Users/wangshunzhou/Workspace/SWDropdownAlertView/SWDropdownAlertView/SWDropdownAlertView.m
+/Users/wangshunzhou/Workspace/SWDropdownAlertView
+__destroy_helper_block_
+__copy_helper_block_
+__47-[SWDropdownAlertView dynamicAnimatorDidPause:]_block_invoke
+__45-[SWDropdownAlertView dismissWithCompletion:]_block_invoke.161
+__45-[SWDropdownAlertView dismissWithCompletion:]_block_invoke.157
+__45-[SWDropdownAlertView dismissWithCompletion:]_block_invoke
+__55-[SWDropdownAlertView showWithCompletion:withDuration:]_block_invoke
++[UIColor(HexColor) colorWithHexString:]
++[UIColor(HexColor) colorWithHexValue:]
+/Users/wangshunzhou/Workspace/SWDropdownAlertView/SWDropdownAlertView/UIColor+HexColor.m
+/Users/wangshunzhou/Library/Developer/Xcode/DerivedData/SWDropdownAlertView-ezjhohvyzhxjcrclsahkesefnpzc/Build/Intermediates.noindex/SWDropdownAlertView.build/Release-iphoneos/SWDropdownAlertView.build/DerivedSources/SWDropdownAlertView_vers.c

@@ -1,0 +1,18 @@
+{
+  "Mac" : [
+
+  ],
+  "watchOS" : [
+
+  ],
+  "tvOS" : [
+
+  ],
+  "commitish" : "0.4.2",
+  "iOS" : [
+    {
+      "name" : "SWDropdownAlertView",
+      "hash" : "bb4c18ab399a36ead8d646831fa501ca3ec62f7963929807e272aa3aba188385"
+    }
+  ]
+}

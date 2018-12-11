@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment version="2048" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -18,12 +18,12 @@
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="I4b-Mt-eNQ">
                     <rect key="frame" x="20" y="20" width="24" height="24"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="24" id="0cA-sb-Lmh"/>
-                        <constraint firstAttribute="height" constant="24" id="Lhm-GZ-FZ5"/>
+                        <constraint firstAttribute="height" constant="24" id="Ljx-5s-aHG"/>
+                        <constraint firstAttribute="width" constant="24" id="XS7-sX-iOg"/>
                     </constraints>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="这是提示框" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qe3-ga-jeg">
-                    <rect key="frame" x="52" y="12" width="284" height="40"/>
+                    <rect key="frame" x="52" y="23.5" width="71.5" height="17"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
@@ -32,12 +32,10 @@
             </subviews>
             <color key="backgroundColor" red="1" green="0.6554072997" blue="0.49456127439999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="Qe3-ga-jeg" firstAttribute="leading" secondItem="I4b-Mt-eNQ" secondAttribute="trailing" constant="8" id="91K-sM-mvc"/>
-                <constraint firstAttribute="centerY" secondItem="I4b-Mt-eNQ" secondAttribute="centerY" id="IK4-2d-ehP"/>
-                <constraint firstItem="I4b-Mt-eNQ" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="SYZ-y3-Gkt"/>
-                <constraint firstAttribute="bottom" secondItem="Qe3-ga-jeg" secondAttribute="bottom" constant="12" id="iBE-8q-sha"/>
-                <constraint firstItem="Qe3-ga-jeg" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="12" id="iR4-fa-vRx"/>
-                <constraint firstAttribute="trailing" secondItem="Qe3-ga-jeg" secondAttribute="trailing" constant="14" id="vVb-XV-bwG"/>
+                <constraint firstItem="Qe3-ga-jeg" firstAttribute="leading" secondItem="I4b-Mt-eNQ" secondAttribute="trailing" constant="8" id="814-Cr-iyu"/>
+                <constraint firstItem="I4b-Mt-eNQ" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="Bld-jx-QyC"/>
+                <constraint firstAttribute="bottom" secondItem="I4b-Mt-eNQ" secondAttribute="bottom" constant="20" id="WtD-Yp-sSN"/>
+                <constraint firstItem="Qe3-ga-jeg" firstAttribute="centerY" secondItem="I4b-Mt-eNQ" secondAttribute="centerY" id="mXp-ac-gPx"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>

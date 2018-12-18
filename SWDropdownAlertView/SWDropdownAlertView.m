@@ -9,7 +9,7 @@
 
 #import "UIColor+HexColor.h"
 #import "SWDropdownAlertView.h"
-#import "Masonry.h"
+#import <Masonry/Masonry.h>
 
 #define alertHeight [[UIApplication sharedApplication] statusBarFrame].size.height + 44
 
@@ -95,7 +95,7 @@ static BOOL appeared = NO;
     NSLog(@"%f", self.safeAreaInsets.top);
     [self.iconImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.iconImageView.superview).offset(20 + self.safeAreaInsets.left);
-        make.centerY.equalTo(self.iconImageView.superview).offset((self.safeAreaInsets.top - 20) / 2);
+        make.centerY.equalTo(self.iconImageView.superview).offset((self.safeAreaInsets.left > 0) ? 0 :(self.safeAreaInsets.top - 20) / 2);
         make.size.mas_equalTo(CGSizeMake(24, 24));
     }];
     

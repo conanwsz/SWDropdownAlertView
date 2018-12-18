@@ -25,5 +25,5 @@ Pod::Spec.new do |s|
   end
   # s.xcconfig = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/libxml2" }
 
-  s.dependency 'Masonry'
+  s.dependency 'Masonry', '~> 0.6.4'
 end

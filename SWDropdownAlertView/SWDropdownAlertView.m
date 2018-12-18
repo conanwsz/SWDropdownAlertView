@@ -9,6 +9,7 @@
 
 #import "UIColor+HexColor.h"
 #import "SWDropdownAlertView.h"
+#import "Masonry.h"
 
 #define alertHeight [[UIApplication sharedApplication] statusBarFrame].size.height + 44
 
@@ -23,8 +24,8 @@ typedef NS_ENUM(NSUInteger, SWDropdownAlertViewAnimationDirection) {
     UIDynamicAnimator *_animator;
 }
 
-@property (weak, nonatomic) IBOutlet UIImageView *iconImageView;
-@property (weak, nonatomic) IBOutlet UILabel *messageLabel;
+@property (strong, nonatomic) UIImageView *iconImageView;
+@property (strong, nonatomic) UILabel *messageLabel;
 @property (assign, nonatomic) SWDropdownAlertViewType alertViewType;
 @property (assign, nonatomic) SWDropdownAlertViewAnimationDirection animationDirection;
 @property (copy, nonatomic) SWDropdownAlertViewCompletion completionBlock;
@@ -48,13 +49,62 @@ static BOOL appeared = NO;
         return nil;
     }
     
-    SWDropdownAlertView *alertView = [[[NSBundle bundleForClass:self.class] loadNibNamed:NSStringFromClass([self class]) owner:nil options:nil] objectAtIndex:0];
+    SWDropdownAlertView *alertView = [[SWDropdownAlertView alloc] init];
     
     [alertView alertViewWithMessage:message withType:type];
     
     return alertView;
 }
 
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        [self setupViews];
+    }
+    return self;
+}
+
+- (void)setupViews {
+    UIImageView *iconImageView = [UIImageView new];
+    [self addSubview:iconImageView];
+    self.iconImageView = iconImageView;
+    
+    UILabel *messageLabel = [UILabel new];
+    [self addSubview:messageLabel];
+    messageLabel.font = [UIFont boldSystemFontOfSize:14];
+    messageLabel.textColor = [UIColor whiteColor];
+    messageLabel.numberOfLines = 0;
+    self.messageLabel = messageLabel;
+    
+    [self.iconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.iconImageView.superview).offset(20);
+        make.centerY.equalTo(self.iconImageView.superview);
+        make.size.mas_equalTo(CGSizeMake(24, 24));
+    }];
+    
+    [self.messageLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.iconImageView.mas_right).offset(8);
+        make.centerY.equalTo(self.iconImageView);
+        make.right.equalTo(self.messageLabel.superview).offset(-20);
+    }];
+}
+
+- (void)safeAreaInsetsDidChange {
+    [super safeAreaInsetsDidChange];
+    NSLog(@"%f", self.safeAreaInsets.top);
+    [self.iconImageView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.iconImageView.superview).offset(20 + self.safeAreaInsets.left);
+        make.centerY.equalTo(self.iconImageView.superview).offset((self.safeAreaInsets.top - 20) / 2);
+        make.size.mas_equalTo(CGSizeMake(24, 24));
+    }];
+    
+    [self.messageLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.iconImageView.mas_right).offset(8);
+        make.centerY.equalTo(self.iconImageView);
+        make.right.equalTo(self.messageLabel.superview).offset(-20 - self.safeAreaInsets.right);
+    }];
+}
 
 - (void)alertViewWithMessage:(NSString*)message withType:(SWDropdownAlertViewType)type{
     _settings = @[@{kSWDropdownAlertViewIconImage : @"IconSuccess",
